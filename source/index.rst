@@ -10,7 +10,7 @@ Welcome to tech_summary's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
+   how_to_be_rich_man
 
 Indices and tables
 ==================
