@@ -11,6 +11,7 @@ Welcome to tech_summary's documentation!
    :caption: Contents:
 
    how_to_be_rich_man
+   second
 
 Indices and tables
 ==================
