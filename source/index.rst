@@ -10,8 +10,12 @@ Welcome to tech_summary's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   how_to_be_rich_man
-   second
+   .. how_to_be_rich_man
+
+   python_property
+
+
+
 
 Indices and tables
 ==================
