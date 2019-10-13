@@ -3,12 +3,15 @@
 
 # import commands  # python3 中已经deprecated
 
-
 """
 import os
 import subprocess
+from os.path  import dirname
+base_dir = dirname( __file__) 
+blog_path = os.path.join(base_dir,'source')
 
-blog_path = '/Users/frank/code/tech_summary/source'
+# print(f"basedir :{base_dir}")
+# print(f"blog_path:{blog_path}")
 
 folder = blog_path
 
