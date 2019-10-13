@@ -1,4 +1,4 @@
-
+# python3中风格规范
 
 [TOC]
 
@@ -6,7 +6,7 @@
 
 
 
-# 保持盲目的一致是头脑简单的表现
+## 保持盲目的一致是头脑简单的表现
 
 (A Foolish Consistency Is The Hobgoblin Of Little Minds)
 
@@ -451,3 +451,9 @@ math.py    operators.py    heapq.py    copy.py
 
 
 
+
+
+<center>  <font color=gray size=1  face="黑体">
+   分享快乐,留住感动.  '2019-10-13 20:09:18'  --frank 
+	   </font>
+</center>

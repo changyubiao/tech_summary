@@ -13,6 +13,7 @@ Welcome to tech_summary's documentation!
    .. how_to_be_rich_man
 
    python_property
+   python_code_style
 
 
 

@@ -1,14 +1,16 @@
 # coding:utf-8
 """
+处理脚本 把  md --> rst 格式的文件
 
-# import commands  # python3 中已经deprecated
+source/*.md  --->  source/*.rst  对应 文件名称的文件.
 
 """
 import os
 import subprocess
-from os.path  import dirname
-base_dir = dirname( __file__) 
-blog_path = os.path.join(base_dir,'source')
+from os.path import abspath
+base_dir = abspath('.')
+
+blog_path = os.path.join(base_dir, 'source')
 
 # print(f"basedir :{base_dir}")
 # print(f"blog_path:{blog_path}")
@@ -16,7 +18,7 @@ blog_path = os.path.join(base_dir,'source')
 folder = blog_path
 
 os.chdir(folder)
-print('===== Processing folder {} ====='.format(folder))
+print('===== Processing folder {!r} ====='.format(folder))
 all_file = os.listdir(folder)
 all_md_file = [file for file in all_file if file.endswith('md')]
 for file in all_md_file:
@@ -29,7 +31,7 @@ for file in all_md_file:
     ret_code = subprocess.call(convert_cmd, shell=True)
 
     if ret_code != 0:
-        print(file + '处理失败')
+        print(file + ' 转换失败')
     else:
         # ret_code == 0
-        print(file + ' 处理完成')
+        print(file + ' 转换完成')
