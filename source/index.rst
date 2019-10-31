@@ -14,6 +14,7 @@ Welcome to tech_summary's documentation!
 
    python_property
    python_code_style
+   python_publish_package
 
 
 
