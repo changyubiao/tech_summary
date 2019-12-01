@@ -5,7 +5,7 @@
 
 举个例子 现在 要发布 useful_decroation 这个包
 
-.. figure:: https://note.youdao.com/yws/public/resource/031d8a8f20d2e586b100e3e197f3d76f/xmlnote/158B33E778B7474F87E7933F303AD6D1/46751
+.. figure:: image/publish_package_01.png
    :alt: imag1
 
    imag1
@@ -131,10 +131,18 @@ register 注册 用户名, 密码 https://pypi.org/account/register/
 如果 执行 check 没有 出现错误 ,就可以 正常 打包了 , 生成 sdist ,
 bdist_wheel 这两种包 .
 
-.. figure:: https://note.youdao.com/yws/public/resource/031d8a8f20d2e586b100e3e197f3d76f/xmlnote/33A25F6BDC834E7C9B4750F13FCE8AF5/46754
-   :alt: img2
+.. raw:: html
 
-   img2
+   <!-- 
+   md 注释语法 
+   ![img2](https://note.youdao.com/yws/public/resource/031d8a8f20d2e586b100e3e197f3d76f/xmlnote/33A25F6BDC834E7C9B4750F13FCE8AF5/46754)
+
+   -->
+
+.. figure:: image/publish_package_02.png
+   :alt: imag1
+
+   imag1
 
 执行 命令 会 生成 一个 dist build 两个目录 其中 dist 就是你 打包的内容 ,
 有两种格式 .tgz , 还有一个 .whl
@@ -152,7 +160,9 @@ bdist_wheel 这两种包 .
 
 如果这里没有报错 就 说明已经发布上去了, 一切顺利.
 
-进入官网 搜一下, 发现 就有了 https://pypi.org/project/useful-decoration/
+进入官网 搜一下, 发现 就有了
+`useful-decoration <https://pypi.org/project/useful-decoration/>`__
+https://pypi.org/project/useful-decoration/
 
 4 可能遇到的障碍
 ----------------
@@ -189,13 +199,11 @@ https://packaging.python.org/guides/distributing-packages-using-setuptools/#lice
 5 参考文档
 ----------
 
-官方文档 https://packaging.python.org/tutorials/packaging-projects/
+`package-projects官方文档 <https://packaging.python.org/tutorials/packaging-projects/>`__
 
-打包数据文件
-https://stackoverflow.com/questions/7522250/how-to-include-package-data-with-setuptools-distribute
+`打包数据文件stackoverflow <https://stackoverflow.com/questions/7522250/how-to-include-package-data-with-setuptools-distribute>`__
 
-useful-decoration项目 地址
-https://github.com/changyubiao/useful_decoration
+`useful-decoration项目地址 <https://github.com/changyubiao/useful_decoration>`__
 
 .. raw:: html
 

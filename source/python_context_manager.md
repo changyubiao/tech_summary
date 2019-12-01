@@ -405,8 +405,11 @@ with open('/tmp/1.sql') as f
 
 
 
+<!--  
 ![img7](https://note.youdao.com/yws/public/resource/3018b4aa1a30076e1a2fb610859b1058/xmlnote/C50833846E784B9FA34F288631AE5496/47243)
 
+-->
+![img7](./image/day1201-context_manager_07.png)
 
 
 ## 总结 
