@@ -10,11 +10,10 @@ Welcome to tech_summary's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   .. how_to_be_rich_man
-
    python_property
    python_code_style
    python_publish_package
+   python_context_manager
 
 
 
