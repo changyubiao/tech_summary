@@ -13,7 +13,7 @@ base_dir = abspath('.')
 blog_path = os.path.join(base_dir, 'source')
 
 # print(f"basedir :{base_dir}")
-# print(f"blog_path:{blog_path}")
+print(f"blog_path:{blog_path}")
 
 folder = blog_path
 

@@ -359,6 +359,14 @@ class Solution:
 
 
 
+假设 n = 3 这种情况，
+
+![image-20201110222111289](image/introduction_recursion/image-20201110222111289.png)
+
+
+
+
+
 
 
 先假设 没有 要求括号合法性 的要求
@@ -461,6 +469,103 @@ def recursion(level, param1, param2, ...):
     # pass
     
 ```
+
+
+
+
+
+
+
+### 组合问题 
+<p>给定两个整数 <em>n</em> 和 <em>k</em>，返回 1 ... <em>n </em>中所有可能的 <em>k</em> 个数的组合。</p>
+
+<p><strong>示例:</strong></p>
+
+<pre><strong>输入:</strong>&nbsp;n = 4, k = 2
+<strong>输出:</strong>
+[
+  [2,4],
+  [3,4],
+  [2,3],
+  [1,2],
+  [1,3],
+  [1,4],
+]</pre>
+<div><div>Related Topics</div><div><li>回溯算法</li></div></div>
+
+
+
+
+
+
+
+思考一下 如何求解：  
+
+
+
+其实 只要吧转态树画出来 理解一下，就相对 简单一点。 当从 取出一个数后，之后 就不能取相同的数字，
+
+所以 怎么控制取不到相同的数字呢？   
+
+
+
+想一想 递归的 基线条件是什么？  
+
+是不是递归的深度 level  等于 k 的时候， 
+
+
+
+每次递归的下一层的时候， 要从没有取到数开始 取，不能取到之前的数字，所以需要在递归 的时候 给一个 参数代表 当前层的开始的位置在哪里呢？   这里我命名为 start 代表下一层开始的数字。 
+
+
+
+![image-20201110232026262](image/introduction_recursion/image-20201110232026262.png)
+
+
+
+
+
+
+
+
+
+
+
+```python
+from typing import List
+
+
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        level = 0
+        start = 1
+        cur_result = []
+        self.result = []
+        self._generate(n, k, level=level, start=start, cur_result=cur_result)
+        return self.result
+
+    def _generate(self, n, k, level, start, cur_result:List):
+        #  terminator
+        if level == k:
+            self.result.append(cur_result.copy())
+            return
+
+        #  currrent logic process  and drill down
+        for i in range(start, n + 1):
+            cur_result.append(i)
+
+            self._generate(n, k, level + 1, start=i + 1, cur_result=cur_result)
+
+            # reverse current level states
+            cur_result.pop(-1)
+
+            
+if __name__ == '__main__':
+    r = Solution().combine(n=4, k=2)
+
+    print(r)        
+```
+
 
 
 
@@ -669,13 +774,13 @@ if __name__ == '__main__':
 ## 参考文档
 
 [爬楼梯问题](https://leetcode-cn.com/problems/climbing-stairs/)  
-[括号生成问题](https://leetcode-cn.com/problems/generate-parentheses/) 
-[不同路径](https://leetcode-cn.com/problems/unique-paths/)
-
-[组合](https://leetcode-cn.com/problems/combinations/)
-[全排列](https://leetcode-cn.com/problems/permutations/)
-[全排列 II ](https://leetcode-cn.com/problems/permutations-ii/)
+[括号生成问题](https://leetcode-cn.com/problems/generate-parentheses/)   
+[不同路径](https://leetcode-cn.com/problems/unique-paths/)  
+[组合](https://leetcode-cn.com/problems/combinations/)  
+[全排列](https://leetcode-cn.com/problems/permutations/)  
+[全排列 II ](https://leetcode-cn.com/problems/permutations-ii/)  
 
 
 
 ​	
+
