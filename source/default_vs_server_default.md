@@ -1,20 +1,10 @@
-# sqlalchemy 的column的默认值属性
+# sqlalchemy中Column的默认值属性
 
 
 
+​		我们知道 使用 sqlalchemy 定义 ORM 对象，需要给一些 字段设置一个默认值，  default 属性 
 
-
-
-
-## 来聊一下 sqlalchemy 的column 的默认值 
-
-
-
-我们知道 使用 sqlalchemy 定义 ORM 对象，需要给一些 字段设置一个默认值，  default 属性 
-
-
-
-类似下面的代码
+类似下面的代码.
 
 ```python
   class Person(Base):
@@ -113,57 +103,47 @@ class Person(Base):
     is_deleted = Column(Integer, comment="是否删除", server_default=text('0'))
 
     def __repr__(self):
-        return "<Person(id='%s', name='%s', mobile='%s')>" % \
+        return "<Person(id='%s', name='%s')>" % \
                (self.id,
-                self.name, self.mobile,)
+                self.name)
 
 ```
 
 
 
-执行 生成 table 语句 ，发现可以正常生成表结构了，并且default  值 也默认设置好了。
+执行生成 table 语句 ，发现可以正常生成表结构了，并且default  值 也默认设置好了。
 
 ![image-20201206113614276](./image/default_vs_server_default/image-20201206113614276.png)
-
-
 
 好了，一切看起来 完美了。 
 
 
 
+所以 如果要想 定义orm ，生成表结构的时候，就自动生成 默认值，一定要使用 `server_default` 这个 字段，并且要求 这个字段为字符串类型， 可以使用 `text` 去 装饰一下。
 
 
 
 
 
+## server_default  vs. default 的区别
+
+​	在sqlalchemy 中 定义Column  字段 可以有两个default 相关的字段， 一个是 `default`  另一个是 `server_default` ,他们之间的区别呢?
 
 
 
+查看源码位置 sqlalchemy.sql.schema.py  `Column` 这个类
+
+`default` 这个属性 ，就是默认生成orm 对象,如果某个字段没有 传值，就使用default 值，然后写入到数据库中。
 
 
 
+`server_default` 这个属性，要求是一个str, unicode 类型。 用来生成表结构的时候， 需要指定字段默认值的时候来指定的。 
 
 
 
+### 看一个小例子
 
-
-
-
-## server default   vs. default 
-
-sqlalchemy.exc.ArgumentError: Argument 'arg' is expected to be one of type '<class 'str'> ,not <class 'int'>
-
-关于sqlalchemy 中  字段 default 属性 
-
-
-
-
-
-
-
-## demo 示例
-
-下面以一个例子作为演示，下面我创建一个User 的model 类 ， 然后 有一个字段 password 我设置一个 default 的属性 ，然后创建一个表
+下面以一个例子作为演示，下面我创建一个User 的model 类 ， 然后 有一个字段 password 我设置一个 default 的属性 ，然后创建一个表。
 
 
 
@@ -233,13 +213,11 @@ CREATE TABLE `User` (
 
 
 
-并没有给 password 生成一个 密码的default 值。 
+User 表结构中并没有给 password 生成一个 密码的default 值。 
 
 
 
 下面我们使用 sqlalchemy 插入一个 user 
-
-
 
 ```python
 if __name__ == '__main__':
@@ -257,45 +235,17 @@ if __name__ == '__main__':
 
 
 
+这是在执行sql 的时候，当 ORM对象 没有给某个字段赋值的时候，   sqlalchemy 会查看 Column 属性的default 是否有值，如果有值，则使用 当前值;  如果没有值，则会默认为default值。
 
-
-这是在执行sql 的时候，当 ORM对象 没有给某个字段赋值的时候，   sqlalchemy 会查看 Column 属性的default 是否有值，如果有值，则会默认为default值。然后在进行 执行sql ,所以就自动加上了默认值。
-
-
-
+然后在进行执行sql ,所以就自动加上了默认值。
 
 
 
+因此想要在表结构生成的时候 就设置默认值， 要使用 `server_default` 这个属性，另外server_default的值必须是字符串。
 
-<sqlalchemy.orm.session.Session object at 0x10c80e390>
-
-
-
-
-
-obj =state.obj()
-
-<sqlalchemy.orm.state.InstanceState object at 0x10cd590d0>
-
-
-
-![image-20201205152416352](./image/default_vs_server_default/image-20201205152416352.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
-```
-正确的设置方式是
-db.Column(db.Integer, default=0, server_default='0')
+```python
+# 正确的设置方式是
+is_deleted = Column(Integer, default=0, server_default=text('0'))
 ```
 
 如果没有写server_default参数，那么在代码中新建对象往数据库插入的时候是有一个值的，但是在数据库里查看表结构，会发现表上并没有给字段设置默认值。
@@ -308,6 +258,51 @@ db.Column(db.Integer, default=0, server_default='0')
 
 
 
+## 设置表的默认创建时间和更新时间
+
+​		有的时候我们希望在表创建的时候，有创建 时间和更新时间。 所以 我们就可以使用 `server_default` 这个属性 来生成就好了。
 
 
-https://docs.sqlalchemy.org/en/13/core/types.html
+
+```python
+from sqlalchemy import TIMESTAMP, Boolean, Column, Float
+from sqlalchemy.ext.declarative import declarative_base
+
+base = declarative_base()
+
+
+class Base(base):
+    __abstract__ = True
+    __table_args__ = {
+        'mysql_engine': 'InnoDB',
+        'mysql_charset': 'utf8',
+        'extend_existing': True
+    }
+    id = Column(INT, primary_key=True, autoincrement=True)
+    
+    create_time = Column(TIMESTAMP, default=None, nullable=True,
+                         server_default=text('CURRENT_TIMESTAMP'))
+    update_time = Column(TIMESTAMP, default=None, nullable=True,
+                         server_default=text(
+                             'CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))
+    
+```
+
+
+
+
+
+
+
+
+
+
+
+## 参考文档
+
+[stackoverflow discussion]( https://stackoverflow.com/questions/13370317/sqlalchemy-default-datetime/33532154#33532154)
+
+[官方文档](https://docs.sqlalchemy.org/en/13/core/types.html)
+
+
+
