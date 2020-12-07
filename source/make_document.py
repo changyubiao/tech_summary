@@ -28,7 +28,6 @@ cd tech_summary
 
 sphinx-build   -b html  source/    build/
 
-
 ```
 
 

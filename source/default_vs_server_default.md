@@ -294,10 +294,6 @@ class Base(base):
 
 
 
-
-
-
-
 ## 参考文档
 
 [stackoverflow discussion]( https://stackoverflow.com/questions/13370317/sqlalchemy-default-datetime/33532154#33532154)
@@ -306,3 +302,11 @@ class Base(base):
 
 
 
+
+
+
+
+<center>  <font color=gray size=1  face="黑体">
+   分享快乐,留住感动.  '2020-12-07 21:08:08'  --frank 
+	   </font>
+</center>

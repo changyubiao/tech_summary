@@ -14,7 +14,9 @@ Welcome to tech_summary's documentation!
    python_code_style
    python_publish_package
    python_context_manager
+   default_vs_server_default
    introduction_recursion
+
 
 
 
